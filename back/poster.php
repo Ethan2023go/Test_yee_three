@@ -4,6 +4,8 @@
     padding:3px;
     margin: 3px;
     justify-content: space-between;
+    align-items: center;
+    background-color:white;
     }
     .item div{
         width:24.5%;
@@ -20,11 +22,11 @@
     <div class="ct" style="width:24.5%;margin:0 0.25%">預告片排序</div>
     <div class="ct" style="width:24.5%;margin:0 0.25%">操作</div>
 </div>
-
+<form action="./api/edit_poster.php" method="post">
 <div style="width:100%;height:190px;overflow:auto">
 
 <?php
-$pos=$Poster->all(" order by rank ");
+$pos=$Poster->all(" order by rank");
 foreach($pos as $idx =>$po){
 ?>
 <div class="item">
@@ -35,16 +37,17 @@ foreach($pos as $idx =>$po){
         <input type="text" name="name[]" value="<?=$po['name'];?>">
     </div>
     <div>
-        <input type="button" value="往上">
-        <input type="button" value="往下">
+        <input class="btn" type="button" value="往上" data-id="<?=$po['id'];?>" data-switch="<?=($idx!==0)?$pos[$idx-1]['id']:$po['id'];?>">
+        <input class="btn" type="button" value="往下" data-id="<?=$po['id'];?>" data-switch="<?=((count($pos)-1)!=$idx)?$pos[$idx+1]['id']:$po['id'];?>">
     </div>
-    <div>
+    <div style='color:black'>
+        <input type="hidden" name="id[]" value="<?=$po['id'];?>">
         <input type="checkbox" name="sh[]" value="<?=$po['id'];?>" <?=($po['sh']==1)?'checked':'';?>>顯示
         <input type="checkbox" name="del[]" value="<?=$po['id'];?>">刪除
-        <select name="ani" id="">
-            <option value="1">淡入淡出</option>
-            <option value="2">縮收</option>
-            <option value="3">滑入滑出</option>
+        <select name="animate[]" id="">
+            <option value="1" <?=($po['animate']==1)?'selected':'';?>>淡入淡出</option>
+            <option value="2" <?=($po['animate']==2)?'selected':'';?>>縮收</option>
+            <option value="3" <?=($po['animate']==3)?'selected':'';?>>滑入滑出</option>
         </select>
     </div>
 </div>    
@@ -56,6 +59,7 @@ foreach($pos as $idx =>$po){
     <input type="submit" value="編輯確定">
     <input type="reset" value="重置">
 </div>
+</form>
 </div>
 <hr>
 <div>
@@ -75,3 +79,14 @@ foreach($pos as $idx =>$po){
     </div>
     </form>
 </div>
+
+<script>
+    $(".btn").on("click",function(){
+        let id=$(this).data('id');
+        let sw=$(this).data('sw');
+        let table='poster'
+        $.post("./api/switch.php",{id,sw,table},()=>{
+            location.reload()
+        })
+    })
+</script>
