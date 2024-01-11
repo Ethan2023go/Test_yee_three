@@ -19,7 +19,7 @@
         <table width="100%" border="0">
           <tbody>
             <tr>
-              <td align="center"><input type="button" value="院線片清單" onclick="lof(&#39;?&#39;)"></td>
+              <td align="center"><input type="button" value="院線片清單" onclick="lof('?')"></td>
             </tr>
           </tbody>
         </table>
