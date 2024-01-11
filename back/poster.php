@@ -51,7 +51,8 @@ foreach($pos as $idx =>$po){
         </select>
     </div>
 </div>    
-<?php    
+<?php  
+// echo "<span style='color:red;'>$idx</span>";
 }
 ?>
 </div>
