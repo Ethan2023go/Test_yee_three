@@ -32,7 +32,7 @@ foreach ($movies as $idx => $movie){
 
 <div class="item">
     <div>
-        <img src="./img/<?=$movie['poster'];?>" style="width:100%">
+        <img src="./img/<?=$movie['poster'];?>" style="width:100%;height:80%">
     </div>
     <div>
         分級: <img src="./icon/03C0<?=$movie['level'];?>.png" style="width:25px">
