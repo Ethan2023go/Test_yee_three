@@ -75,7 +75,24 @@ foreach ($movies as $idx => $movie){
 </div>
 <script>
 $(".show-btn").on("click",function(){
-    
+    let id =$(this).data('id');
+    $.post("./api/show.php",{id},()=>{
+        // reload 考試寫法
+        location.reload()
+
+        // 第一種寫法 工作上維護用
+        switch($(this).text()){
+            case "隱藏":
+                $(this).text("顯示")
+            break;
+            case "顯示":
+                $ (this).text("隱藏")
+            break;
+        }
+        
+        // 三元運算寫法 拚效率 (tick) 
+        //$(this).text(($(this).text()=='顯示')?"隱藏":"顯示");
+    })
 })
 $(".sw-btn").on("click",function(){
 
