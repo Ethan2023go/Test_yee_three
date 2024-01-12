@@ -1,6 +1,6 @@
 <style>
 .lists{
-    /* position: relative; */
+   /*  position: relative; */
     left:114px;
 }
 .item *{
@@ -10,7 +10,6 @@
  width:200px;
  height:240px;
  margin:auto;
-
  box-sizing: border-box;
  display:none;
 }
@@ -78,7 +77,7 @@
         </div>
         
         <div class="controls">
-        <div class="left"></div>
+            <div class="left"></div>
             <div class="btns">
             <?php
             foreach($posters as $idx =>$poster ){
@@ -96,7 +95,7 @@
     </div>
 </div>
 <script>
-$(".item").eq(0).show();
+    $(".item").eq(0).show();
 
 
 </script>
