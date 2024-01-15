@@ -40,7 +40,6 @@ if(!empty($_POST)){
       <?php
         if(isset($_SESSION['login'])){
 
-
       ?>
       <div class="ct a rb" style="position:relative; width:101.5%; left:-1%; padding:3px; top:-9px;"> 
       <a href="?do=tit">網站標題管理</a>| 
