@@ -1,7 +1,7 @@
 <?php include_once 'db.php';
 $movie=$_GET['id'];
-$ondate=$Moive->find($movie)['ondate'];
-$date=date("Y-m-d");
+$ondate=$Movie->find($movie)['ondate'];
+$today=date("Y-m-d");
 // ondate     today  3
 // ondate +1  today  2
 // ondate +2  today  1
