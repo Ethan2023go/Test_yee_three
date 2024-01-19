@@ -13,6 +13,7 @@ foreach($ords as $ord){
     $seats=array_merge($seats,$tmp);
 }
 
+
 ?>
 <style>
  #room{
@@ -24,8 +25,8 @@ foreach($ords as $ord){
     margin:auto;
     box-sizing: border-box;
     padding:19px 112px 0 112px;
-
- }  
+    
+ }
  .seat {
     width: 63px;
     height: 85px;
@@ -35,7 +36,7 @@ foreach($ords as $ord){
 .seats {
     display: flex;
     flex-wrap: wrap;
-}  
+}
 .chk{
     position: absolute;
     right:2px;
@@ -44,10 +45,10 @@ foreach($ords as $ord){
 </style>
 
 <div id="room">
-   <div class="seats">
-<?php
+<div class="seats">
+    <?php
     for($i=0;$i<20;$i++){
-
+        
         echo "<div class='seat'>";
         echo "<div class='ct'>";
         echo (floor($i/5)+1) . "排";
@@ -59,15 +60,15 @@ foreach($ords as $ord){
         }else{
             echo "<img src='./icon/03D02.png'>";
         }
-        
         echo "</div>";
         if(!in_array($i,$seats)){
-        echo "<input type='checkbox' name='chk' value='$i' class='chk'>";
+            echo "<input type='checkbox' name='chk' value='$i' class='chk'>";
         }
         echo "</div>";
     }
     ?>
 </div>
+
 </div>
 <div id="info">
 <div>您選擇的電影是：<?=$movie['name'];?></div>
@@ -82,32 +83,28 @@ foreach($ords as $ord){
 <script>
 let seats=new Array();
 
- $(".chk").on("change",function(){
-    // 判斷是否點選
+$(".chk").on("change",function(){
     if($(this).prop('checked')){
-        //判斷點選數量上限
         if(seats.length+1<=4){
             seats.push($(this).val())
-            // 正確的話存入陣列
         }else{
             $(this).prop('checked',false)
             alert("每個人只能勾選四張票")
         }
     }else{
-        // 使用 indexOf 方法查找指定值在 seats 陣列中的索引
         seats.splice(seats.indexOf($(this).val()),1)
     }
-    // console.log(seats.length) 可看陣列
     $("#tickets").text(seats.length)
-})  
 
+})  
 function checkout(){
     $.post("./api/checkout.php",{movie:'<?=$movie['name'];?>',
                                  date:'<?=$date;?>',
                                  session:'<?=$session;?>',
                                  qt:seats.length,
-                                 seats},(no)=>{
+                                 seats},
+                                 (no)=>{
                                     location.href=`?do=result&no=${no}`;
-                                })
+                                 })
 }
 </script>
