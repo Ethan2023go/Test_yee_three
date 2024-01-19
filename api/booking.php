@@ -59,12 +59,13 @@ $session=$_GET['session'];
 <div>您已經勾選<span id='tickets'>0</span>張票，最多可以購買四張票</div>
 <div>
     <button onclick="$('#select').show();$('#booking').hide()">上一步</button>
-    <button>訂購</button>
+    <button onclick="checkout()">訂購</button>
 </div>
 </div>
 
 <script>
 let seats=new Array();
+
  $(".chk").on("change",function(){
     // 判斷是否點選
     if($(this).prop('checked')){
@@ -83,4 +84,14 @@ let seats=new Array();
     // console.log(seats.length) 可看陣列
     $("#tickets").text(seats.length)
 })  
+
+function checkout(){
+    $.post("./api/checkout.php",{movie:'<?=$movie['name'];?>',
+                                 date:'<?=$date;?>',
+                                 session:'<?=$session;?>',
+                                 qt:seats.length,
+                                 seats},(no)=>{
+                                    location.href=`?do=result&no=${no}`;
+                                })
+}
 </script>
