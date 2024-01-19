@@ -64,6 +64,7 @@ $session=$_GET['session'];
 </div>
 
 <script>
+let seats=new Array();
  $(".chk").on("change",function(){
     // 判斷是否點選
     if($(this).prop('checked')){
