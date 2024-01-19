@@ -62,3 +62,24 @@ $session=$_GET['session'];
     <button>訂購</button>
 </div>
 </div>
+
+<script>
+ $(".chk").on("change",function(){
+    // 判斷是否點選
+    if($(this).prop('checked')){
+        //判斷點選數量上限
+        if(seats.length+1<=4){
+            seats.push($(this).val())
+            // 正確的話存入陣列
+        }else{
+            $(this).prop('checked',false)
+            alert("每個人只能勾選四張票")
+        }
+    }else{
+        // 使用 indexOf 方法查找指定值在 seats 陣列中的索引
+        seats.splice(seats.indexOf($(this).val()),1)
+    }
+    // console.log(seats.length) 可看陣列
+    $("#tickets").text(seats.length)
+})  
+</script>
